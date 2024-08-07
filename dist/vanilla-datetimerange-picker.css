@@ -23,7 +23,8 @@
   left: 20px;
   z-index: 3001;
   display: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Open Sans", sans-serif!important;
+  /* font-family: 'Times New Roman', Times, serif; */
   font-size: 15px;
   line-height: 1em;
   box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
@@ -129,7 +130,7 @@
 
 .daterangepicker .drp-calendar {
   display: none;
-  max-width: 270px;
+  max-width: 380px;
 }
 
 .daterangepicker .drp-calendar.left {
@@ -168,12 +169,12 @@
   text-align: center;
   vertical-align: middle;
   min-width: 32px;
-  width: 32px;
-  height: 24px;
+  width: 48px;
+  height: 35px;
   line-height: 24px;
-  font-size: 12px;
-  border-radius: 4px;
-  border: 1px solid transparent;
+  font-size: 14px;
+  /* border-radius: 4px; */
+  /* border: 1px solid transparent; */
   white-space: nowrap;
   cursor: pointer;
 }
@@ -234,6 +235,7 @@
 }
 
 .daterangepicker th.month {
+  padding: 20px;
   width: auto;
 }
 
@@ -244,7 +246,7 @@
 }
 
 .daterangepicker select.monthselect, .daterangepicker select.yearselect {
-  font-size: 12px;
+  font-size: 14px;
   padding: 1px;
   height: auto;
   margin: 0;
@@ -254,12 +256,14 @@
 }
 
 .daterangepicker select.monthselect {
-  margin-right: 2%;
-  width: 56%;
+  margin-right: 4%;
+  width: 50%;
+ 
 }
 
 .daterangepicker select.yearselect {
-  width: 40%;
+  width: 50%;
+ 
 }
 
 .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
@@ -287,7 +291,7 @@
 .daterangepicker .drp-buttons {
   clear: both;
   text-align: right;
-  padding: 8px;
+  padding: 20px;
   border-top: 1px solid #ddd;
   display: none;
   line-height: 12px;
@@ -296,15 +300,16 @@
 
 .daterangepicker .drp-selected {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   padding-right: 8px;
 }
 
 .daterangepicker .drp-buttons .btn {
   margin-left: 8px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   padding: 4px 8px;
+    font-family: "Open Sans", sans-serif!important;
 }
 
 .daterangepicker.show-ranges.single.rtl .drp-calendar.left {
