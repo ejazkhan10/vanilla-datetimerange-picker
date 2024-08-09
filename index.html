@@ -8,31 +8,111 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@300;500;600;700&family=Poppins:wght@200;300;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>Document</title>
+    <style>
+        .ranges-dropdown-container {
+    text-align: center;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    display: flex!important;
+    justify-content: center!important;
+    padding: 20px!important;
+}
+
+/* Style for the dropdown */
+.ranges-dropdown {
+    font-size: 14px!important;
+    width: 100%!important;
+    margin: 0 auto!important;
+    cursor: pointer!important;
+    padding: 15px 5px!important;
+    border-radius: 10px!important;
+}
+.ranges-dropdown-container option{
+    padding: 10px!important;
+    line-height: 20px;
+}
+
+
+
+
+
+    </style>
 </head>
 <body>
-    <input type="text" id="datetimerange-input1" size="24" style="text-align:center">
-
+    <!-- <input type="text" id="datetimerange-input1" size="24" style="text-align:center"> -->
+    <input type="text" id="datetimerange-input1" />
 
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" type="text/javascript"></script>
     <script src="/dist/vanilla-datetimerange-picker.js"> </script>
-
     <script>
-        window.addEventListener("load", function (event) {
-                new DateRangePicker('datetimerange-input1', {
-                    showDropdowns: true,
-                    showCustomRangeLabel:true,
-                    alwaysShowCalendars:true,
-                    ranges: {
-                            'Today': [moment(), moment()],
-                            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                            'This Month': [moment().startOf('month'), moment().endOf('month')],
-                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-                });
-            });
-
+        
     </script>
+
+<script>
+    window.addEventListener("load", function (event) {
+        // Initialize DateRangePicker without predefined ranges in the sidebar
+        const dateRangePicker = new DateRangePicker('datetimerange-input1', {
+            showDropdowns: true,
+            showCustomRangeLabel: false,
+            alwaysShowCalendars: true,
+            autoApply: false,
+            linkedCalendars: false,
+            locale: {
+                format: 'MM/DD/YYYY'
+            }
+        });
+
+        // Remove predefined ranges from the sidebar
+        document.querySelector('.daterangepicker .ranges').remove();
+
+        // Create a dropdown for ranges in the footer
+        const rangesDropdownContainer = document.createElement('div');
+        rangesDropdownContainer.classList.add('ranges-dropdown-container');
+        
+        const rangesDropdown = document.createElement('select');
+        rangesDropdown.classList.add('ranges-dropdown');
+
+        // Add a placeholder option
+        const placeholderOption = document.createElement('option');
+        placeholderOption.innerText = 'Select Date Range';
+        placeholderOption.value = '';
+        rangesDropdown.appendChild(placeholderOption);
+
+        // Populate dropdown with predefined ranges
+        for (const [label, range] of Object.entries({
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        })) {
+            const option = document.createElement('option');
+            option.innerText = label;
+            option.value = label;
+            rangesDropdown.appendChild(option);
+
+            // Map the option label to the corresponding date range
+            option.range = range;
+        }
+
+        rangesDropdownContainer.appendChild(rangesDropdown);
+
+        // Listen for range selection in the dropdown
+        rangesDropdown.addEventListener('change', function (event) {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            if (selectedOption.range) {
+                dateRangePicker.setStartDate(selectedOption.range[0]);
+                dateRangePicker.setEndDate(selectedOption.range[1]);
+                dateRangePicker.hide();
+            }
+        });
+
+        // Append the dropdown to the footer of the date picker
+        document.querySelector('.daterangepicker').appendChild(rangesDropdownContainer);
+    });
+</script>
+
+
 </body>
 </html>

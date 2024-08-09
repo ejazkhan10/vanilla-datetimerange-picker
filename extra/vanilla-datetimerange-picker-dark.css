@@ -434,3 +434,24 @@
     clear: none !important;
   }
 }
+/* Style for the custom footer with ranges */
+/* Style for the dropdown container in the footer */
+.ranges-dropdown-container {
+    text-align: center;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    display: flex!important;
+    justify-content: center!important;
+    padding: 20px!important;
+}
+
+/* Style for the dropdown */
+.ranges-dropdown {
+    font-size: 14px!important;
+    width: 100%!important;
+    margin: 0 auto!important;
+    cursor: pointer!important;
+    padding: 15px 0px!important;
+    border-radius: 10px!important;
+}
+
