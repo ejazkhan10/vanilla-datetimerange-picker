@@ -100,6 +100,10 @@ var DateRangePicker;
                     '<button class="cancelBtn" type="button"></button>' +
                     '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
                 '</div>' +
+                '<div class="ranges-footer">' +
+                    
+                '</div>' +
+                
             '</div>';
 
         this.parentEl = options.parentEl ? options.parentEl : this.parentEl;
